@@ -8,3 +8,8 @@
 /var/
 /vendor/
 ###< symfony/framework-bundle ###
+
+###> docker-configuration ###
+/Dockerfile.db
+/nginx/
+###< docker-configuration ###

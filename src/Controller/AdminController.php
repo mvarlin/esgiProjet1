@@ -14,7 +14,7 @@ class AdminController extends AbstractController
 
     #[Route(path: '/addfilm', name: 'add_film')]
     public function addFilm(): Response {
-        return $this->render(view: 'admin/admin_add_film.html.twig');
+        return $this->render(view: 'admin/admin_add_films.html.twig');
     }
 
     #[Route(path: '/films', name: 'admin_film')]
