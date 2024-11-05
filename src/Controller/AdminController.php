@@ -17,7 +17,7 @@ class AdminController extends AbstractController
         return $this->render(view: 'admin/admin_add_films.html.twig');
     }
 
-    #[Route(path: '/films', name: 'admin_film')]
+    #[Route(path: '/adminfilms', name: 'admin_film')]
     public function listFilm(): Response {
         return $this->render(view: 'admin/admin_films.html.twig');
     }
@@ -25,6 +25,11 @@ class AdminController extends AbstractController
     #[Route(path: '/adminuser', name: 'admin_users')]
     public function user(): Response {
         return $this->render(view: 'admin/admin_users.html.twig');
+    }
+
+    #[Route(path: '/adminupload', name: 'admin_upload')]
+    public function upload(): Response {
+        return $this->render(view: 'admin/admin_upload.html.twig');
     }
 
     
