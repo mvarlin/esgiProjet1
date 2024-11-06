@@ -12,8 +12,8 @@ class HomeController extends AbstractController
         return $this->render(view: 'others/index.html.twig');
     }
 
-    #[Route(path: '/defaulthome', name: 'default_home_page')]
-    public function default(): Response {
-        return $this->render(view: 'others/index.html.twig');
-    }
+    // #[Route(path: '/defaulthome', name: 'default_home_page')]
+    // public function default(): Response {
+    //     return $this->render(view: 'others/default.html.twig');
+    // }
 }
