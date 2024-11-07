@@ -2,7 +2,7 @@
 
 namespace App\Entity;
 
-use App\Enum\MediaMediaTypeEnum;
+use App\Enum\MediaTypeEnum;
 use App\Repository\MediaRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
@@ -17,8 +17,8 @@ class Media
     #[ORM\Column]
     private ?int $id = null;
 
-    #[ORM\Column(enumType: MediaMediaTypeEnum::class)]
-    private ?MediaMediaTypeEnum $media_type = null;
+    #[ORM\Column(enumType: MediaTypeEnum::class)]
+    private ?MediaTypeEnum $media_type = null;
 
     #[ORM\Column(length: 255)]
     private ?string $title = null;
@@ -75,12 +75,12 @@ class Media
         return $this->id;
     }
 
-    public function getMediaType(): ?MediaMediaTypeEnum
+    public function getMediaType(): ?MediaTypeEnum
     {
         return $this->media_type;
     }
 
-    public function setMediaType(MediaMediaTypeEnum $media_type): static
+    public function setMediaType(MediaTypeEnum $media_type): static
     {
         $this->media_type = $media_type;
 

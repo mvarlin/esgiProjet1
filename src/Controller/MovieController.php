@@ -27,7 +27,7 @@ class MovieController extends AbstractController
         return $this->render(view: 'movie/discover.html.twig');
     }
 
-    #[Route(path: '/lists', name: 'movie_discover')]
+    #[Route(path: '/lists', name: 'movie_lists')]
     public function list(): Response {
         return $this->render(view: 'movie/lists.html.twig');
     }
