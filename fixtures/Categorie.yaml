@@ -1,0 +1,37 @@
+App\Entity\Categorie:
+  categorie_1:
+    name: "action"
+    label: "Action"
+  categorie_2:
+    name: "aventure"
+    label: "Aventure"
+  categorie_3:
+    name: "comédie"
+    label: "Comédie"
+  categorie_4:
+    name: "science-fiction"
+    label: "Science-Fiction"
+  categorie_5:
+    name: "animation"
+    label: "Animation"
+  categorie_6:
+    name: "documentaire"
+    label: "Documentaire"
+  categorie_7:
+    name: "horreur"
+    label: "Horreur"
+  categorie_8:
+    name: "fantastique"
+    label: "Fantastique"
+  categorie_9:
+    name: "policier"
+    label: "Policier"
+  categorie_10:
+    name: "drame"
+    label: "Drame"
+  categorie_11:
+    name: "thriller"
+    label: "Thriller"
+  categorie_12:
+    name: "romance"
+    label: "Romance"
