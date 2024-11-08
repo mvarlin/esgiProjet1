@@ -20,6 +20,7 @@ class MediaFixtures extends Fixture
         foreach ($data[Media::class] as $reference => $mediaData) {
             $media = new Media();
             $media->setMediaType(random_int(0, 1) === 1 ? MediaTypeEnum::MOVIE : MediaTypeEnum::TV_SHOW); // A changer
+            // $media = random_int(min: 0, max: 1) === 0 ? new Movie() : new Serie(); // A changer
             $media->setTitle($mediaData['title']);
             $media->setShortDescription($mediaData['shortDescription']);
             $media->setLongDescription($mediaData['longDescription']);
