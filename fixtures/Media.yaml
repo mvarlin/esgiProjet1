@@ -14,7 +14,7 @@ App\Entity\Movie:
 
 # Génération de 45 séries.
 App\Entity\Serie:
-  media_serie_{1..45} (extends media):
+  media_serie_{1..50} (extends media):
     title: 'Série <current()>'
 
 App\Entity\Season:
@@ -38,8 +38,8 @@ App\Entity\Episode:
 
 # Génération d'historiques de visionnage.
 App\Entity\WatchHistory:
-    watch_history_{1..500}:
-      lastWatchedAt: "<dateTimeBetween('-1 week', '+1 week')>"
-      numberOfViews: '<numberBetween(1, 100)>'
-      watcher: '@user_*'
-      media: '@media_*'
+  watch_history_{1..500}:
+    lastWatchedAt: "<dateTimeBetween('-1 week', '+1 week')>"
+    numberOfViews: '<numberBetween(1, 100)>'
+    watcher: '@user_*'
+    media: '@media_*'
