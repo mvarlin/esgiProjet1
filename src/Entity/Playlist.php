@@ -29,14 +29,21 @@ class Playlist
     private ?user $author = null;
 
     /**
-     * @var Collection<int, Media>
+     * @var Collection<int, PlaylistMedia>
      */
-    #[ORM\OneToMany(targetEntity: Media::class, mappedBy: 'playlist')]
-    private Collection $media;
+    #[ORM\OneToMany(targetEntity: PlaylistMedia::class, mappedBy: 'playlist')]
+    private Collection $playlistMedia;
+
+    /**
+     * @var Collection<int, PlaylistSubscription>
+     */
+    #[ORM\OneToMany(targetEntity: PlaylistSubscription::class, mappedBy: 'playlist')]
+    private Collection $playlistSubscription;
 
     public function __construct()
     {
-        $this->media = new ArrayCollection();
+        $this->playlistMedia = new ArrayCollection();
+        $this->playlistSubscription = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -93,29 +100,59 @@ class Playlist
     }
 
     /**
-     * @return Collection<int, Media>
+     * @return Collection<int, PlaylistMedia>
      */
-    public function getMedia(): Collection
+    public function getPlaylistMedia(): Collection
     {
-        return $this->media;
+        return $this->playlistMedia;
     }
 
-    public function addMedium(Media $medium): static
+    public function addPlaylistMedium(PlaylistMedia $playlistMedium): static
     {
-        if (!$this->media->contains($medium)) {
-            $this->media->add($medium);
-            $medium->setPlaylist($this);
+        if (!$this->playlistMedia->contains($playlistMedium)) {
+            $this->playlistMedia->add($playlistMedium);
+            $playlistMedium->setPlaylist($this);
         }
 
         return $this;
     }
 
-    public function removeMedium(Media $medium): static
+    public function removePlaylistMedium(PlaylistMedia $playlistMedium): static
     {
-        if ($this->media->removeElement($medium)) {
+        if ($this->playlistMedia->removeElement($playlistMedium)) {
             // set the owning side to null (unless already changed)
-            if ($medium->getPlaylist() === $this) {
-                $medium->setPlaylist(null);
+            if ($playlistMedium->getPlaylist() === $this) {
+                $playlistMedium->setPlaylist(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, PlaylistSubscription>
+     */
+    public function getPlaylistSubscription(): Collection
+    {
+        return $this->playlistSubscription;
+    }
+
+    public function addPlaylistSubscription(PlaylistSubscription $playlistSubscription): static
+    {
+        if (!$this->playlistSubscription->contains($playlistSubscription)) {
+            $this->playlistSubscription->add($playlistSubscription);
+            $playlistSubscription->setPlaylist($this);
+        }
+
+        return $this;
+    }
+
+    public function removePlaylistSubscription(PlaylistSubscription $playlistSubscription): static
+    {
+        if ($this->playlistSubscription->removeElement($playlistSubscription)) {
+            // set the owning side to null (unless already changed)
+            if ($playlistSubscription->getPlaylist() === $this) {
+                $playlistSubscription->setPlaylist(null);
             }
         }
 

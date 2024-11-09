@@ -23,6 +23,10 @@ class WatchHistory
     #[ORM\JoinColumn(nullable: false)]
     private ?User $userHistory = null;
 
+    #[ORM\ManyToOne(inversedBy: 'watchHistory')]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?Media $media = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -60,6 +64,18 @@ class WatchHistory
     public function setUserHistory(?User $userHistory): static
     {
         $this->userHistory = $userHistory;
+
+        return $this;
+    }
+
+    public function getMedia(): ?Media
+    {
+        return $this->media;
+    }
+
+    public function setMedia(?Media $media): static
+    {
+        $this->media = $media;
 
         return $this;
     }
