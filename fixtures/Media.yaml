@@ -18,13 +18,13 @@ App\Entity\Serie:
     title: 'Série <current()>'
 
 App\Entity\Season:
-  season_1_{@serie_media*}:
+  season_1_{@media_serie*}:
     number: '<numberBetween(1, 10)>'
     serie: '<current()>'
-  season_2_{@serie_media*}:
+  season_2_{@media_serie*}:
     number: '<numberBetween(1, 10)>'
     serie: '<current()>'
-  season_3_{@serie_media*}:
+  season_3_{@media_serie*}:
     number: '<numberBetween(1, 10)>'
     serie: '<current()>'
 
@@ -32,7 +32,7 @@ App\Entity\Season:
 App\Entity\Episode:
   episode_{1..500}:
     title: '<sentence()>'
-    duration: '<numberBetween(45, 90)>'
+    duration: '<numberBetween(20, 60)>'
     releasedAt: "<dateTimeBetween('-1 week', '+1 week')>"
     season: '@season_*'
 

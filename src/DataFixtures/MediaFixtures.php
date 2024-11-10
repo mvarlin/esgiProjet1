@@ -2,46 +2,48 @@
 
 namespace App\DataFixtures;
 
+use App\Entity\Episode;
 use App\Entity\Media;
 use App\Entity\Movie;
+use App\Entity\Season;
 use App\Entity\Serie;
-use App\Enum\MediaTypeEnum;
+use DateTimeImmutable;
 use Doctrine\Bundle\FixturesBundle\Fixture;
-use Doctrine\Common\Collections\Expr\Value;
 use Doctrine\Persistence\ObjectManager;
-use Symfony\Component\Yaml\Yaml;
 use Faker\Factory;
 
 class MediaFixtures extends Fixture
 {
-    public const MAX_MEDIA = 100;
+    public const MAX_MEDIAS = 100;
+    public const MAX_SEASONS = 10;
+    public const MAX_EPISODES = 24;
 
     public function load(ObjectManager $manager): void
     {
-        $faker = Factory::create();
-        $fixturesPath = __DIR__ . '/../../fixtures/media.yaml';
-        $data = Yaml::parseFile($fixturesPath);
-        $media = random_int(min: 0, max: 1) === 0 ? new Movie() : new Serie();
-        $title = $media instanceof Movie ? 'Film' : 'Série';
-        //faker Film ou Série
-        // $faker->name($title);
-        // $media->setTitle($faker->name($mediaData['title']));
-        
-        for ($i=0; $i < self::MAX_MEDIA ; $i++) { 
-            $media = new Media();
-            $media->setMediaType(random_int(0, 1) === 0 ? MediaTypeEnum::MOVIE : MediaTypeEnum::TV_SHOW); // A changer
-            // $media = random_int(min: 0, max: 1) === 0 ? new Movie() : new Serie(); // A changer
-            // $media->setTitle(title: $mediaData['title']);
-            $media->setTitle(title: $faker->name($title));
+        $medias = [];
+        $this->createMedia(manager: $manager, medias: $medias);
+        $manager->flush();
+    }
+
+    protected function createMedia(ObjectManager $manager, array &$medias): void
+    {
+        for ($i=0; $i < self::MAX_MEDIAS ; $i++) { 
+            $faker = Factory::create();
+            $media = random_int(min: 0, max: 1) === 0 ? new Movie() : new Serie();
+            $type = $media instanceof Movie ? 'Film' : 'Série';
+            $media->setTitle(title: $faker->name($type));
             $media->setShortDescription(short_description: $faker->realText(50));
             $media->setLongDescription(long_description: $faker->realText(200));
             $media->setReleaseDate(release_date: $faker->dateTimeBetween('now', '+1 year'));
             $media->setCoverImage(cover_image: 'azertyuiop');
             $this->addStaff(media: $media);
             $this->addStream(media: $media);
-            $manager->persist($media);
+            if($media instanceof Serie){
+                $this->createSeasons(manager: $manager, media: $media);
+            }
+            $manager->persist(object: $media);
+            $medias[] = $media;
         }
-        $manager->flush();
     }
 
     protected function addStaff(Media $media): void
@@ -70,5 +72,30 @@ class MediaFixtures extends Fixture
             }
         }
         $media->setStream(stream: $stream);
+    }
+
+    protected function createSeasons(ObjectManager $manager, Serie $media): void
+    {
+        for ($i = 0; $i < random_int(min: 1, max: self::MAX_SEASONS); $i++) { 
+            $season = new Season();
+            $season->setSeasonNumber(season_number: $i + 1);
+            $season->setSerie(serie: $media);
+            $manager->persist(object: $season);
+            $this->createEpisodes(manager: $manager, season: $season);
+        }
+        
+    }
+
+    protected function createEpisodes(ObjectManager $manager, Season $season): void
+    {
+        for ($i = 0; $i < random_int(min: 1, max: self::MAX_EPISODES); $i++) { 
+            $episode = new Episode();
+            $episode->setTitle(title: 'Episode '. $i + 1);
+            $episode->setDuration(duration: random_int(min: 10, max: 60));
+            $episode->setReleaseDate(release_date: new DateTimeImmutable());
+            $episode->setSeason(season: $season);
+            $manager->persist(object: $episode);
+        }
+        
     }
 }
