@@ -7,18 +7,21 @@ use App\Repository\MediaRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
+use Doctrine\ORM\Mapping\InheritanceType;
+use Doctrine\ORM\Mapping\DiscriminatorColumn;
+use Doctrine\ORM\Mapping\DiscriminatorMap;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: MediaRepository::class)]
+#[InheritanceType('JOINED')]
+#[DiscriminatorColumn(name: 'mediaType', type: 'string')]
+#[DiscriminatorMap(['movie' => Movie::class, 'serie' => Serie::class])]
 class Media
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
     private ?int $id = null;
-
-    #[ORM\Column(enumType: MediaTypeEnum::class)]
-    private ?MediaTypeEnum $media_type = null;
 
     #[ORM\Column(length: 255)]
     private ?string $title = null;
@@ -83,18 +86,6 @@ class Media
     public function getId(): ?int
     {
         return $this->id;
-    }
-
-    public function getMediaType(): ?MediaTypeEnum
-    {
-        return $this->media_type;
-    }
-
-    public function setMediaType(MediaTypeEnum $media_type): static
-    {
-        $this->media_type = $media_type;
-
-        return $this;
     }
 
     public function getTitle(): ?string
