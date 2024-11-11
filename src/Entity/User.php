@@ -10,6 +10,7 @@ use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: UserRepository::class)]
 #[ORM\Table(name: '`user`')]
+
 class User
 {
     #[ORM\Id]
@@ -27,7 +28,10 @@ class User
     private ?string $password = null;
 
     #[ORM\Column(enumType: UserAccountStatusEnum::class)]
-    private ?UserAccountStatusEnum $account_status = null;
+    private ?UserAccountStatusEnum $account_status = UserAccountStatusEnum::INACTIVE;
+
+    #[ORM\ManyToOne(inversedBy: 'users')]
+    private ?Subscription $currentSubscription = null;
 
     /**
      * @var Collection<int, Comment>
@@ -41,10 +45,6 @@ class User
     #[ORM\OneToMany(targetEntity: Playlist::class, mappedBy: 'author')]
     private Collection $playlists;
 
-    #[ORM\ManyToOne(inversedBy: 'subscription')]
-    #[ORM\JoinColumn(nullable: false)]
-    private ?Subscription $subscription = null;
-
     /**
      * @var Collection<int, PlaylistSubscription>
      */
@@ -57,12 +57,19 @@ class User
     #[ORM\OneToMany(targetEntity: WatchHistory::class, mappedBy: 'userHistory')]
     private Collection $history;
 
+    /**
+     * @var Collection<int, SubscriptionHistory>
+     */
+    #[ORM\OneToMany(targetEntity: SubscriptionHistory::class, mappedBy: 'userSubscriptionHistory')]
+    private Collection $subscriptionHistories;
+
     public function __construct()
     {
         $this->comments = new ArrayCollection();
         $this->playlists = new ArrayCollection();
         $this->playlistSubscription = new ArrayCollection();
         $this->history = new ArrayCollection();
+        $this->subscriptionHistories = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -114,6 +121,18 @@ class User
     public function setAccountStatus(UserAccountStatusEnum $account_status): static
     {
         $this->account_status = $account_status;
+
+        return $this;
+    }
+
+    public function getCurrentSubscription(): ?Subscription
+    {
+        return $this->currentSubscription;
+    }
+
+    public function setCurrentSubscription(?Subscription $currentSubscription): static
+    {
+        $this->currentSubscription = $currentSubscription;
 
         return $this;
     }
@@ -178,18 +197,6 @@ class User
         return $this;
     }
 
-    public function getSubscription(): ?Subscription
-    {
-        return $this->subscription;
-    }
-
-    public function setSubscription(?Subscription $subscription): static
-    {
-        $this->subscription = $subscription;
-
-        return $this;
-    }
-
     /**
      * @return Collection<int, PlaylistSubscription>
      */
@@ -249,4 +256,36 @@ class User
 
         return $this;
     }
+
+    /**
+     * @return Collection<int, SubscriptionHistory>
+     */
+    public function getSubscriptionHistories(): Collection
+    {
+        return $this->subscriptionHistories;
+    }
+
+    public function addSubscriptionHistory(SubscriptionHistory $subscriptionHistory): static
+    {
+        if (!$this->subscriptionHistories->contains($subscriptionHistory)) {
+            $this->subscriptionHistories->add($subscriptionHistory);
+            $subscriptionHistory->setUserSubscriptionHistory($this);
+        }
+
+        return $this;
+    }
+
+    public function removeSubscriptionHistory(SubscriptionHistory $subscriptionHistory): static
+    {
+        if ($this->subscriptionHistories->removeElement($subscriptionHistory)) {
+            // set the owning side to null (unless already changed)
+            if ($subscriptionHistory->getUserSubscriptionHistory() === $this) {
+                $subscriptionHistory->setUserSubscriptionHistory(null);
+            }
+        }
+
+        return $this;
+    }
+
+    
 }
