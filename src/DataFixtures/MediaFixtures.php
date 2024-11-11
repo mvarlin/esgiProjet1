@@ -7,6 +7,8 @@ use App\Entity\Media;
 use App\Entity\Movie;
 use App\Entity\Season;
 use App\Entity\Serie;
+use App\Entity\User;
+use App\Entity\WatchHistory;
 use DateTimeImmutable;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Persistence\ObjectManager;
@@ -22,7 +24,7 @@ class MediaFixtures extends Fixture
     {
         $medias = [];
         $this->createMedia(manager: $manager, medias: $medias);
-        $manager->flush();
+        // $manager->flush();
     }
 
     protected function createMedia(ObjectManager $manager, array &$medias): void
@@ -97,5 +99,18 @@ class MediaFixtures extends Fixture
             $manager->persist(object: $episode);
         }
         
+    }
+
+    protected function createWatchHistory(ObjectManager $manager, Media $media, User $user, array $mediasn): void
+    {
+        $faker = Factory::create();
+        for ($i = 0; $i < random_int(min: 1, max: 10); $i++) { 
+            $watchHistory = new WatchHistory();
+            // $watchHistory->setUserHistory(user: $user);
+            $watchHistory->setMedia(media: $media);
+            // $watchHistory->setLastWatched(last_watched: $faker->dateTimeBetween('-1 year', 'now'));
+            $watchHistory->setNumberOfViews(random_int(min: 10, max: 60));
+            $manager->persist(object: $watchHistory);
+        }
     }
 }

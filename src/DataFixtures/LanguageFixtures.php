@@ -21,6 +21,6 @@ class LanguageFixtures extends Fixture
             $manager->persist($Language);
         }
 
-        $manager->flush();
+        // $manager->flush();
     }
 }

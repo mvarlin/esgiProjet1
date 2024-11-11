@@ -1,0 +1,18 @@
+App\Entity\Playlist:
+  playlist_{1..50}:
+    name: 'Playlist <current()>'
+    created_at: "<dateTimeBetween('-1 week', '+1 week')>"
+    updated_at: "<dateTimeBetween('-1 week', '+1 week')>"
+    author: '@user_*'
+
+App\Entity\PlaylistSubscription:
+  playsub_{1..40}:
+    subscribed_at: "<dateTimeBetween('-1 week', '+1 week')>"
+    playlist: '@playlist_*'
+    userPlaylistSubscription: '@user_*'
+
+App\Entity\PlaylistMedia:
+  playmedia_{1..30}:
+    playlist: '@playlist_*'
+    media: '@media_*'
+    added_at: "<dateTimeBetween('-1 week', '+1 week')>"
