@@ -1,6 +1,6 @@
 App\Entity\User:
   user_template (template):
-    username: '<username()>'
+    username (unique): '<username()>'
     email: '<email()>'
     password: '<password()>'
     # account_status: '@season_*'
