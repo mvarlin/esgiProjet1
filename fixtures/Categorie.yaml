@@ -35,3 +35,27 @@ App\Entity\Categorie:
   categorie_12:
     name: "romance"
     label: "Romance"
+  categorie_13:
+    name: "western"
+    label: "Western"
+  categorie_14:
+    name: "guerre"
+    label: "Guerre"
+  categorie_15:
+    name: "musical"
+    label: "Musical"
+  categorie_16:
+    name: "biopic"
+    label: "Biopic"
+  categorie_17:
+    name: "historique"
+    label: "Historique"
+  categorie_18:
+    name: "comédie musicale"
+    label: "Comédie Musicale"
+  categorie_19:
+    name: "espionnage"
+    label: "Espionnage"
+  categorie_20:
+    name: "comédie dramatique"
+    label: "Comédie Dramatique"

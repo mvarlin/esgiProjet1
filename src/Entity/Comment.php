@@ -19,7 +19,7 @@ class Comment
     private ?string $content = null;
 
     #[ORM\Column(enumType: CommentStatusEnum::class)]
-    private ?CommentStatusEnum $status = null;
+    private ?CommentStatusEnum $status = CommentStatusEnum::PENDING;
 
     #[ORM\ManyToOne(inversedBy: 'comments')]
     #[ORM\JoinColumn(nullable: false)]

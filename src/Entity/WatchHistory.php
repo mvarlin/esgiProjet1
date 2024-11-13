@@ -14,7 +14,7 @@ class WatchHistory
     private ?int $id = null;
 
     #[ORM\Column]
-    private ?\DateInterval $last_watched = null;
+    private ?\DateTimeImmutable $last_watched = null;
 
     #[ORM\Column]
     private ?int $number_of_views = null;
@@ -23,17 +23,21 @@ class WatchHistory
     #[ORM\JoinColumn(nullable: false)]
     private ?User $userHistory = null;
 
+    #[ORM\ManyToOne(inversedBy: 'watchHistory')]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?Media $media = null;
+
     public function getId(): ?int
     {
         return $this->id;
     }
 
-    public function getLastWatched(): ?\DateInterval
+    public function getLastWatched(): ?\DateTimeImmutable
     {
         return $this->last_watched;
     }
 
-    public function setLastWatched(\DateInterval $last_watched): static
+    public function setLastWatched(\DateTimeImmutable $last_watched): static
     {
         $this->last_watched = $last_watched;
 
@@ -60,6 +64,18 @@ class WatchHistory
     public function setUserHistory(?User $userHistory): static
     {
         $this->userHistory = $userHistory;
+
+        return $this;
+    }
+
+    public function getMedia(): ?Media
+    {
+        return $this->media;
+    }
+
+    public function setMedia(?Media $media): static
+    {
+        $this->media = $media;
 
         return $this;
     }
