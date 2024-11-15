@@ -1,5 +1,5 @@
 <?php    
-namespace App\Faker;
+namespace App\Faker\CustomProvider;
 
 use Faker\Provider\Base;
 use Faker\Factory;
