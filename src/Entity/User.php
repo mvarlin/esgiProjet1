@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use Symfony\Component\Uid\Uuid;
 use App\Enum\UserAccountStatusEnum;
 use App\Repository\UserRepository;
 use Doctrine\Common\Collections\ArrayCollection;
@@ -14,9 +15,10 @@ use Doctrine\ORM\Mapping as ORM;
 class User
 {
     #[ORM\Id]
-    #[ORM\GeneratedValue]
-    #[ORM\Column]
-    private ?int $id = null;
+    #[ORM\Column(type: 'binary_uuid', unique: true, length: 16)]
+    #[ORM\GeneratedValue(strategy: 'CUSTOM')]
+    #[ORM\CustomIdGenerator(class: 'doctrine.uuid_generator')]
+    private ?Uuid $id = null;
 
     #[ORM\Column(length: 255)]
     private ?string $username = null;
@@ -34,37 +36,38 @@ class User
     private ?Subscription $currentSubscription = null;
 
     /**
-     * @var Collection<int, Comment>
+     * @var Collection<id, Comment>
      */
     #[ORM\OneToMany(targetEntity: Comment::class, mappedBy: 'author')]
     private Collection $comments;
 
     /**
-     * @var Collection<int, Playlist>
+     * @var Collection<id, Playlist>
      */
     #[ORM\OneToMany(targetEntity: Playlist::class, mappedBy: 'author')]
     private Collection $playlists;
 
     /**
-     * @var Collection<int, PlaylistSubscription>
+     * @var Collection<id, PlaylistSubscription>
      */
     #[ORM\OneToMany(targetEntity: PlaylistSubscription::class, mappedBy: 'userPlaylistSubscription')]
     private Collection $playlistSubscription;
 
     /**
-     * @var Collection<int, WatchHistory>
+     * @var Collection<id, WatchHistory>
      */
     #[ORM\OneToMany(targetEntity: WatchHistory::class, mappedBy: 'userHistory')]
     private Collection $history;
 
     /**
-     * @var Collection<int, SubscriptionHistory>
+     * @var Collection<id, SubscriptionHistory>
      */
     #[ORM\OneToMany(targetEntity: SubscriptionHistory::class, mappedBy: 'userSubscriptionHistory')]
     private Collection $subscriptionHistories;
 
     public function __construct()
     {
+        $this->id = Uuid::v6()->toBinary();
         $this->comments = new ArrayCollection();
         $this->playlists = new ArrayCollection();
         $this->playlistSubscription = new ArrayCollection();
@@ -72,7 +75,7 @@ class User
         $this->subscriptionHistories = new ArrayCollection();
     }
 
-    public function getId(): ?int
+    public function getId(): ?Uuid
     {
         return $this->id;
     }

@@ -21,8 +21,9 @@ class Comment
     #[ORM\Column(enumType: CommentStatusEnum::class)]
     private ?CommentStatusEnum $status = CommentStatusEnum::PENDING;
 
-    #[ORM\ManyToOne(inversedBy: 'comments')]
-    #[ORM\JoinColumn(nullable: false)]
+    #[ORM\ManyToOne(targetEntity: 'App\Entity\User')]
+    #[ORM\JoinColumn(name: 'author_id', referencedColumnName: 'id', nullable: false)]
+    #[ORM\Column(type :'binary_uuid', length: 16)]
     private ?user $author = null;
 
     #[ORM\ManyToOne(inversedBy: 'comments')]
