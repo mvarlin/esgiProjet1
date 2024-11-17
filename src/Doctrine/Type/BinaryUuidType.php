@@ -2,7 +2,7 @@
 
 // src/Doctrine/Type/BinaryUuidType.php
 
-namespace App\Doctrine\Type;
+namespace App\Doctrine\BinaryType;
 
 use Doctrine\DBAL\Platforms\AbstractPlatform;
 use Doctrine\DBAL\Types\Type;
