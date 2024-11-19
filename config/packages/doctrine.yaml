@@ -9,7 +9,8 @@ doctrine:
         profiling_collect_backtrace: '%kernel.debug%'
         use_savepoints: true
         types:
-            binary_uuid: App\Doctrine\Type\BinaryUuidType
+            char_uuid: App\Doctrine\CharType\CharUuidType
+            binary_uuid: App\Doctrine\BinaryType\BinaryUuidType
     orm:
         auto_generate_proxy_classes: true
         enable_lazy_ghost_objects: true
