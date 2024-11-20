@@ -7,7 +7,7 @@ parameters:
 
 services:
   # default configuration for services in *this* file
-  App\Faker\CustomProvider: ~
+  App\DataFixtures\Faker\CustomProvider: ~
     # tags: [ { name: nelmio_alice.faker.provider } ]
   _defaults:
     autowire: true # Automatically injects dependencies in your services.
