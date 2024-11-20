@@ -17,7 +17,7 @@ class PlaylistSubscription
     private ?\DateTimeImmutable $subscribed_at = null;
 
     #[ORM\ManyToOne(inversedBy: 'playlistSubscription')]
-    #[ORM\JoinColumn(nullable: false)]
+    #[ORM\JoinColumn(name: 'user_playlist_subscription_id')]
     private ?User $userPlaylistSubscription = null;
 
     #[ORM\ManyToOne(inversedBy: 'playlistSubscription')]

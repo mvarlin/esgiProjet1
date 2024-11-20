@@ -3,6 +3,7 @@ namespace App\Faker;
 
 use Faker\Provider\Base;
 use Faker\Factory;
+use Symfony\Component\Uid\Uuid;
 
 class CustomProvider extends Base
 {
@@ -41,4 +42,8 @@ class CustomProvider extends Base
         }
         return $stream;
     }
+
+    // public function uuid(): string{
+    //     return Uuid::v6()->toBinary(16);
+    // }
 }

@@ -2,12 +2,16 @@
 
 namespace App\Entity;
 
-use Symfony\Component\Uid\Uuid;
 use App\Enum\UserAccountStatusEnum;
 use App\Repository\UserRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
+
+use Symfony\Component\Uid\Uuid;
 use Doctrine\ORM\Mapping as ORM;
+use App\Doctrine\CharType\CharUuidType;
+
+
 
 #[ORM\Entity(repositoryClass: UserRepository::class)]
 #[ORM\Table(name: '`user`')]
@@ -15,9 +19,8 @@ use Doctrine\ORM\Mapping as ORM;
 class User
 {
     #[ORM\Id]
-    #[ORM\Column(type: 'binary_uuid', unique: true, length: 16)]
-    #[ORM\GeneratedValue(strategy: 'CUSTOM')]
-    #[ORM\CustomIdGenerator(class: 'doctrine.uuid_generator')]
+    #[ORM\Column(type: 'char_uuid', length: 36, unique: true)]  // Utilisation de 'string' pour l'UUID
+    #[ORM\GeneratedValue(strategy: 'NONE')]  // Nous générons l'UUID manuellement
     private ?Uuid $id = null;
 
     #[ORM\Column(length: 255)]
@@ -65,9 +68,9 @@ class User
     #[ORM\OneToMany(targetEntity: SubscriptionHistory::class, mappedBy: 'userSubscriptionHistory')]
     private Collection $subscriptionHistories;
 
-    public function __construct()
-    {
-        $this->id = Uuid::v6()->toBinary();
+    public function __construct(){
+        $this->id = Uuid::v4();
+        // $this->id = Uuid::v4()->toRfc4122();
         $this->comments = new ArrayCollection();
         $this->playlists = new ArrayCollection();
         $this->playlistSubscription = new ArrayCollection();
@@ -78,6 +81,11 @@ class User
     public function getId(): ?Uuid
     {
         return $this->id;
+    }
+
+    public function setId(Uuid $id): void
+    {
+        $this->id = $id;
     }
 
     public function getUsername(): ?string

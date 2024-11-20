@@ -1,6 +1,5 @@
 App\Entity\User:
   user_template (template):
-    id: "@=Symfony\\Component\\Uid\\UuidV6::v6()"
     username (unique): '<username()>'
     email: '<email()>'
     password: '<password()>'

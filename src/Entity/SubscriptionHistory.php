@@ -24,8 +24,8 @@ class SubscriptionHistory
     #[ORM\JoinColumn(nullable: false)]
     private ?Subscription $subscription = null;
 
-    #[ORM\ManyToOne(inversedBy: 'subscriptionHistories')]
-    #[ORM\JoinColumn(nullable: false)]
+    #[ORM\ManyToOne(inversedBy: 'playlistSubscription')]
+    #[ORM\JoinColumn(name: 'user_subscription_history_id')]
     private ?User $userSubscriptionHistory = null;
 
     public function getId(): ?int

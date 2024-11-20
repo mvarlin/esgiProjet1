@@ -20,7 +20,7 @@ class WatchHistory
     private ?int $number_of_views = null;
 
     #[ORM\ManyToOne(inversedBy: 'history')]
-    #[ORM\JoinColumn(nullable: false)]
+    #[ORM\JoinColumn(name: 'user_history_id')]
     private ?User $userHistory = null;
 
     #[ORM\ManyToOne(inversedBy: 'watchHistory')]
