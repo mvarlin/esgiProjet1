@@ -1,6 +1,12 @@
 <?php
 
 namespace App\Controller;
+
+use App\Entity\Categorie;
+use App\Entity\Language;
+use App\Entity\Media;
+
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
@@ -13,13 +19,27 @@ class AdminController extends AbstractController
     }
 
     #[Route(path: '/addfilm', name: 'add_film')]
-    public function addFilm(): Response {
-        return $this->render(view: 'admin/admin_add_films.html.twig');
+    public function addFilm(EntityManagerInterface $entityManager): Response {
+        $repositoryCategory = $entityManager->getRepository(Categorie::class);
+        $repositoryLanguage = $entityManager->getRepository(Language::class);
+        
+        $categorys = $repositoryCategory->findAllCategory();
+        $languages = $repositoryLanguage->findAllLanguage();
+        
+        return $this->render(view: 'admin/admin_add_films.html.twig', parameters: [
+            'categorys' => $categorys,
+            'languages' => $languages
+        ]);
     }
 
     #[Route(path: '/adminfilms', name: 'admin_film')]
-    public function listFilm(): Response {
-        return $this->render(view: 'admin/admin_films.html.twig');
+    public function listFilm(EntityManagerInterface $entityManager): Response {
+        $repositoryMedia = $entityManager->getRepository(Media::class);
+        $medias = $repositoryMedia->findAllMedia();
+        // var_dump($medias);
+        return $this->render(view: 'admin/admin_films.html.twig',  parameters: [
+            'medias' => $medias,
+        ]);
     }
 
     #[Route(path: '/adminuser', name: 'admin_users')]
