@@ -2,7 +2,6 @@
 
 namespace App\Controller;
 
-use App\Entity\Media;
 use App\Entity\Movie;
 use App\Entity\Categorie;
 
@@ -16,8 +15,10 @@ class MovieController extends AbstractController
     #[Route(path: '/category/{id}', name: 'movie_category')]
     public function category(EntityManagerInterface $entityManager, int $id): Response {
         $repositoryCategory = $entityManager->getRepository(Categorie::class);
+
         $categoryOne = $repositoryCategory->findOneById($id);
         $categorys = $repositoryCategory->findAllCategory();
+
         return $this->render(view: 'movie/category.html.twig', parameters: ['categorys' => $categorys, 'categoryOne' => $categoryOne]);
     }
 
@@ -40,8 +41,8 @@ class MovieController extends AbstractController
 
     #[Route(path: '/lists', name: 'movie_lists')]
     public function list(EntityManagerInterface $entityManager): Response {
-        $repository = $entityManager->getRepository(Movie::class);
-        $movies = $repository->findAll();
+        $repositoryMovies = $entityManager->getRepository(Movie::class);
+        $movies = $repositoryMovies->findAll();
         return $this->render(view: 'movie/lists.html.twig', parameters: ['movies' => $movies]);
     }
 
