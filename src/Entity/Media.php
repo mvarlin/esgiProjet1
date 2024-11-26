@@ -27,16 +27,16 @@ class Media
     private ?string $title = null;
 
     #[ORM\Column(type: Types::TEXT)]
-    private ?string $short_description = null;
+    private ?string $shortDescription = null;
 
     #[ORM\Column(type: Types::TEXT)]
-    private ?string $long_description = null;
+    private ?string $longDescription = null;
 
     #[ORM\Column(type: Types::DATE_MUTABLE)]
     private ?\DateTimeInterface $release_date = null;
 
     #[ORM\Column(length: 255)]
-    private ?string $cover_image = null;
+    private ?string $coverImage = null;
 
     #[ORM\Column]
     private array $staff = [];
@@ -102,24 +102,24 @@ class Media
 
     public function getShortDescription(): ?string
     {
-        return $this->short_description;
+        return $this->shortDescription;
     }
 
-    public function setShortDescription(string $short_description): static
+    public function setShortDescription(string $shortDescription): static
     {
-        $this->short_description = $short_description;
+        $this->shortDescription = $shortDescription;
 
         return $this;
     }
 
     public function getLongDescription(): ?string
     {
-        return $this->long_description;
+        return $this->longDescription;
     }
 
-    public function setLongDescription(string $long_description): static
+    public function setLongDescription(string $longDescription): static
     {
-        $this->long_description = $long_description;
+        $this->longDescription = $longDescription;
 
         return $this;
     }
@@ -138,12 +138,12 @@ class Media
 
     public function getCoverImage(): ?string
     {
-        return $this->cover_image;
+        return $this->coverImage;
     }
 
-    public function setCoverImage(string $cover_image): static
+    public function setCoverImage(string $coverImage): static
     {
-        $this->cover_image = $cover_image;
+        $this->coverImage = $coverImage;
 
         return $this;
     }

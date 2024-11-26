@@ -13,11 +13,13 @@ App\Entity\Media:
 App\Entity\Movie:
   media_movie_{1..50} (extends media):
     title: 'Movie <current()>'
+    categories: ['@categorie_*', '@categorie_*', '@categorie_*']
 
 # Génération de 45 séries.
 App\Entity\Serie:
   media_serie_{1..50} (extends media):
     title: 'Série <current()>'
+    # categories: ['@categorie_*', '@categorie_*', '@categorie_*']
 
 App\Entity\Season:
   season_1_{@media_serie*}:
