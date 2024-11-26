@@ -5,7 +5,7 @@ App\Entity\Media:
     shortDescription: '<realText(20)>'
     longDescription: '<realText(200)>'
     releaseDate: '<datetime()>'
-    coverImage: 'https://picsum.photos/400/550?random=<numberBetween(1, 100)>'
+    coverImage: 'https://picsum.photos/400/550?random=<current()>'
     staff: '<staff()>' # Créer la fonction via Faker
     stream: '<stream()>' # Créer la fonction via Faker
 
