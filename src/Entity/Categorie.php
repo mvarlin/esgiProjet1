@@ -69,20 +69,20 @@ class Categorie
         return $this->media;
     }
 
-    public function addMedium(Media $medium): static
+    public function addMedia(Media $media): static
     {
-        if (!$this->media->contains($medium)) {
-            $this->media->add($medium);
-            $medium->addCategory($this);
+        if (!$this->media->contains($media)) {
+            $this->media->add($media);
+            $media->addCategory($this);
         }
 
         return $this;
     }
 
-    public function removeMedium(Media $medium): static
+    public function removeMedia(Media $media): static
     {
-        if ($this->media->removeElement($medium)) {
-            $medium->removeCategory($this);
+        if ($this->media->removeElement($media)) {
+            $media->removeCategory($this);
         }
 
         return $this;

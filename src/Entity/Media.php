@@ -27,16 +27,16 @@ class Media
     private ?string $title = null;
 
     #[ORM\Column(type: Types::TEXT)]
-    private ?string $short_description = null;
+    private ?string $shortDescription = null;
 
     #[ORM\Column(type: Types::TEXT)]
-    private ?string $long_description = null;
+    private ?string $longDescription = null;
 
     #[ORM\Column(type: Types::DATE_MUTABLE)]
     private ?\DateTimeInterface $release_date = null;
 
     #[ORM\Column(length: 255)]
-    private ?string $cover_image = null;
+    private ?string $coverImage = null;
 
     #[ORM\Column]
     private array $staff = [];
@@ -102,24 +102,24 @@ class Media
 
     public function getShortDescription(): ?string
     {
-        return $this->short_description;
+        return $this->shortDescription;
     }
 
-    public function setShortDescription(string $short_description): static
+    public function setShortDescription(string $shortDescription): static
     {
-        $this->short_description = $short_description;
+        $this->shortDescription = $shortDescription;
 
         return $this;
     }
 
     public function getLongDescription(): ?string
     {
-        return $this->long_description;
+        return $this->longDescription;
     }
 
-    public function setLongDescription(string $long_description): static
+    public function setLongDescription(string $longDescription): static
     {
-        $this->long_description = $long_description;
+        $this->longDescription = $longDescription;
 
         return $this;
     }
@@ -138,12 +138,12 @@ class Media
 
     public function getCoverImage(): ?string
     {
-        return $this->cover_image;
+        return $this->coverImage;
     }
 
-    public function setCoverImage(string $cover_image): static
+    public function setCoverImage(string $coverImage): static
     {
-        $this->cover_image = $cover_image;
+        $this->coverImage = $coverImage;
 
         return $this;
     }
@@ -288,22 +288,22 @@ class Media
         return $this->playlistMedia;
     }
 
-    public function addPlaylistMedium(PlaylistMedia $playlistMedium): static
+    public function addPlaylistMedia(PlaylistMedia $playlistMedia): static
     {
-        if (!$this->playlistMedia->contains($playlistMedium)) {
-            $this->playlistMedia->add($playlistMedium);
-            $playlistMedium->setMedia($this);
+        if (!$this->playlistMedia->contains($playlistMedia)) {
+            $this->playlistMedia->add($playlistMedia);
+            $playlistMedia->setMedia($this);
         }
 
         return $this;
     }
 
-    public function removePlaylistMedium(PlaylistMedia $playlistMedium): static
+    public function removePlaylistMedia(PlaylistMedia $playlistMedia): static
     {
-        if ($this->playlistMedia->removeElement($playlistMedium)) {
+        if ($this->playlistMedia->removeElement($playlistMedia)) {
             // set the owning side to null (unless already changed)
-            if ($playlistMedium->getMedia() === $this) {
-                $playlistMedium->setMedia(null);
+            if ($playlistMedia->getMedia() === $this) {
+                $playlistMedia->setMedia(null);
             }
         }
 

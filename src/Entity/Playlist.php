@@ -107,22 +107,22 @@ class Playlist
         return $this->playlistMedia;
     }
 
-    public function addPlaylistMedium(PlaylistMedia $playlistMedium): static
+    public function addPlaylistMedia(PlaylistMedia $playlistMedia): static
     {
-        if (!$this->playlistMedia->contains($playlistMedium)) {
-            $this->playlistMedia->add($playlistMedium);
-            $playlistMedium->setPlaylist($this);
+        if (!$this->playlistMedia->contains($playlistMedia)) {
+            $this->playlistMedia->add($playlistMedia);
+            $playlistMedia->setPlaylist($this);
         }
 
         return $this;
     }
 
-    public function removePlaylistMedium(PlaylistMedia $playlistMedium): static
+    public function removePlaylistMedia(PlaylistMedia $playlistMedia): static
     {
-        if ($this->playlistMedia->removeElement($playlistMedium)) {
+        if ($this->playlistMedia->removeElement($playlistMedia)) {
             // set the owning side to null (unless already changed)
-            if ($playlistMedium->getPlaylist() === $this) {
-                $playlistMedium->setPlaylist(null);
+            if ($playlistMedia->getPlaylist() === $this) {
+                $playlistMedia->setPlaylist(null);
             }
         }
 

@@ -3,14 +3,32 @@ App\Entity\Subscription:
     name: 'Abonnement 1 mois - HD'
     price: 2.99
     duration_in_month: 1
+    description: 'Abonnement mensuel en HD'
   subscription_2:
     name: 'Abonnement 6 mois - HD'
     price: '14.99'
     duration_in_month: 6
+    description: 'Abonnement semestriel en HD'
   subscription_3:
     name: 'Abonnement 12 mois - HD'
     price: 24.99
     duration_in_month: 12
+    description: 'Abonnement annuel en HD'
+  subscription_4:
+    name: 'Abonnement 24 mois - HD'
+    price: 39.99
+    duration_in_month: 24
+    description: 'Abonnement biennal'
+  subscription_5:
+    name: 'Abonnement 36 mois - HD'
+    price: 49.99
+    duration_in_month: 36
+    description: 'Abonnement triennal en HD'
+  subscription_6:
+    name: 'Abonnement à vie - Ultra 4K HD MondoVision'
+    price: 999.99
+    duration_in_month: 9999
+    description: 'Abonnement à vie en Ultra 4K HD MondoVision'
 
 App\Entity\SubscriptionHistory:
   sub_history:
