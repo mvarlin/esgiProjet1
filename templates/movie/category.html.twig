@@ -36,13 +36,13 @@
             <div class="flex flex-row items-center space-x-12">
                 <nav class="flex space-x-6 text-gray-400 font-medium">
                     {# <a href="{{path('movie_category', {category: category.id})}}" class="hover:text-gray-700">{{ category.name }}</a> #}
-                {% for categoryList in categoryLists %}
+                {# {% for categoryList in categoryLists %}
                     <a href="{{path('movie_category', {id: categoryList.id})}}" class="hover:text-gray-700"> {{ categoryList.name }}</a>
                         {% if loop.index is divisible by(10) %}
                             </div><div class="flex flex-row items-center space-x-12">
                                 </nav><nav class="flex space-x-6 text-gray-400 font-medium">
                         {% endif %}
-                {% endfor %}
+                {% endfor %} #}
                 </nav>
             </div>
             <div class="flex flex-col items-center mt-9">

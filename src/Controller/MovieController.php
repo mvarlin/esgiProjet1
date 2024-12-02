@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\Categorie;
 use App\Entity\Movie;
 use App\Repository\CategorieRepository;
 use App\Repository\MediaRepository;
@@ -13,12 +14,11 @@ use Symfony\Component\Routing\Attribute\Route;
 class MovieController extends AbstractController
 {
     #[Route(path: '/category/{id}', name: 'movie_category')]
-    public function category(CategorieRepository $categorieRepository, string $id): Response {
-        $categories = $categorieRepository->find($id);
-        $categoryList = $categorieRepository->findAll();
+    public function category(Categorie $categories, string $id): Response {
+        dump($categories);
         return $this->render(view: 'movie/category.html.twig', parameters: [
             'categories' => $categories,
-            'categoryLists' => $categoryList
+            // 'categoryLists' => $categoryList
         ]);
     }
 
@@ -28,14 +28,20 @@ class MovieController extends AbstractController
     }
 
     #[Route(path: '/detail/{id}', name: 'detail')]
-    public function detail(string $id, MediaRepository $mediaRepository): Response {
-        $medias = $mediaRepository->find($id);
-        dump($medias);
-        return $this->render(view: 'movie/detail.html.twig', parameters: ['medias' => $medias]);
+    public function detail(string $id, Movie $movie): Response {
+        $staffs = $movie->getStaff();
+        $streams = $movie->getStream();
+        dump($staffs);
+        dump($movie);
+        return $this->render(view: 'movie/detail.html.twig', parameters: [
+            'movie' => $movie,
+            'staffs' => $staffs,
+            'streams' => $streams
+        ]);
     }
 
     #[Route(path: '/discover', name: 'movie_discover')]
-    public function discover(EntityManagerInterface $entityManager, CategorieRepository $categorieRepository): Response {
+    public function discover(CategorieRepository $categorieRepository): Response {
         $categorys = $categorieRepository->findAll();
         return $this->render(view: 'movie/discover.html.twig', parameters: ['categorys' => $categorys]);
     }

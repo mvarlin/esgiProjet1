@@ -27,17 +27,11 @@ class CustomProvider extends Base
     public function stream(): array
     {
         $faker = Factory::create();
-        $stream = [];
-        $rolesStream = ['Réalisateur', 'Acteur'];
-        foreach ($rolesStream as $roleStream) {
+        $stream = []; 
+        for ($i = 0; $i < random_int(min: 2, max: 7); $i++) {
             $name = $faker->name();
-            if ($roleStream === 'Réalisateur') {
-                $stream[] = ['name' => $name, 'role' => $roleStream, 'image' => 'https://i.pravatar.cc/500/150?u='.$name];
-            } else {    
-                for ($i = 0; $i < random_int(min: 2, max: 5); $i++) {
-                    $stream[] = ['name' => $name, 'role' => $roleStream, 'image' => 'https://i.pravatar.cc/500/150?u='.$name];
-                }
-            }
+            $characterName = $faker->firstName();
+            $stream[] = ['name' => $name, 'characterName' => $characterName, 'role' => 'Acteur', 'image' => 'https://i.pravatar.cc/500/150?u='.$name];
         }
         return $stream;
     }
