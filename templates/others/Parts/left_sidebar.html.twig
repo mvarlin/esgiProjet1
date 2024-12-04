@@ -22,6 +22,8 @@
             </svg>
             <span>Découvrir</span>
         </a>
+
+        {% if app.user %}
         <a class=" flex items-center space-x-2 py-1  group hover:border-r-4 hover:border-r-red-600 hover:font-semibold " href="{{path('movie_lists')}}">
             <svg class="h-5 w-5 group-hover:fill-red-600" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
                 <g>
@@ -31,6 +33,9 @@
             </svg>
             <span>Mes listes</span>
         </a>
+        {% endif %}
+
+        {% if app.user %}
         <div class="mt-8 text-gray-400/70  font-medium uppercase">Social</div>
         <a class=" flex items-center space-x-2 py-1  group hover:border-r-4 hover:border-r-red-600 hover:font-semibold " href="{{path('profile_page')}}">
             <svg class="h-5 w-5 group-hover:fill-red-600" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
@@ -47,6 +52,8 @@
             </svg>
             <span>Mes abonnements</span>
         </a>
+        {% endif %}
+
         <div class="mt-8 text-gray-400/70  font-medium uppercase">General</div>
         <a class=" flex items-center space-x-2 py-1  group hover:border-r-4 hover:border-r-red-600 hover:font-semibold " href="{{path('settings_page')}}">
             <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 group-hover:stroke-red-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
@@ -55,6 +62,8 @@
             </svg>
             <span>Paramètres</span>
         </a>
+
+        {% if app.user %}
         <a class=" flex items-center space-x-2 py-1  group hover:border-r-4 hover:border-r-red-600 hover:font-semibold" href="{{path('auth_login')}}">
             <svg class="h-5 w-5 group-hover:fill-red-600" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
                 <g>
@@ -64,5 +73,7 @@
             </svg>
             <span>Déconnexion</span>
         </a>
+        {% endif %}
+
     </div>
 </aside>
