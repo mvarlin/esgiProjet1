@@ -25,7 +25,7 @@ App\Entity\Subscription:
     duration_in_month: 36
     description: 'Abonnement triennal en HD'
   subscription_6:
-    name: 'Abonnement à vie - Ultra 4K HD MondoVision'
+    name: 'Abonnement à vie - Ultra 4K'
     price: 999.99
     duration_in_month: 9999
     description: 'Abonnement à vie en Ultra 4K HD MondoVision'

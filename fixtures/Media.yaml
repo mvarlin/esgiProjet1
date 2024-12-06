@@ -2,10 +2,10 @@
 App\Entity\Media:
   media (template):
     title: 'Media <current()>'
-    shortDescription: '<realText(20)>'
-    longDescription: '<realText(200)>'
+    shortDescription: '<realText(150)>'
+    longDescription: '<realText(4500)>'
     releaseDate: '<datetime()>'
-    coverImage: 'https://picsum.photos/400/550?random=<current()>'
+    coverImage: 'https://picsum.photos/id/<current()>/400/550' 
     staff: '<staff()>' # Créer la fonction via Faker
     stream: '<stream()>' # Créer la fonction via Faker
 
@@ -14,6 +14,7 @@ App\Entity\Movie:
   media_movie_{1..50} (extends media):
     title: 'Movie <current()>'
     categories: ['@categorie_*', '@categorie_*', '@categorie_*']
+    language: ['@language_*', '@language_*', '@language_*']
 
 # Génération de 45 séries.
 App\Entity\Serie:
