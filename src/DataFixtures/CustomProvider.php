@@ -1,17 +1,11 @@
 <?php    
-namespace App\DataFixtures\Faker;
+namespace App\DataFixtures;
 
 use Faker\Provider\Base;
 use Faker\Factory;
 
 class CustomProvider extends Base
 {
-    public function customProvider()
-    {
-        // Retourne une valeur factice personnalisée
-        return 'valeur_personnalisée';
-    }
-
     public function staff(): array
     {
         $faker = Factory::create();
