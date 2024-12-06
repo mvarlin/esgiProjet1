@@ -2,7 +2,6 @@ App\Entity\User:
   user_template (template):
     username (unique): '<username()>'
     email: '<email()>'
-  # plainPassword: !php/const App\DataFixtures\AppFixtures::USER_PASSWORD
     plainPassword: 'usermdp'
     password: <hashPassword(usermdp)>
     roles: '[ROLE_USER]'
