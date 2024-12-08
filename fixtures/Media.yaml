@@ -1,7 +1,7 @@
 # Template pour les séries et les films.
 App\Entity\Media:
   media (template):
-    title: 'Media <current()>'
+    title: 'Media <current()> - <title()>'
     shortDescription: '<realText(150)>'
     longDescription: '<realText(4500)>'
     releaseDate: '<datetime()>'
@@ -12,15 +12,16 @@ App\Entity\Media:
 # Génération de 50 films.
 App\Entity\Movie:
   media_movie_{1..50} (extends media):
-    title: 'Movie <current()>'
+    title: 'M<current()> - <realText(30)>'
     categories: ['@categorie_*', '@categorie_*', '@categorie_*']
     language: ['@language_*', '@language_*', '@language_*']
 
 # Génération de 45 séries.
 App\Entity\Serie:
   media_serie_{1..50} (extends media):
-    title: 'Série <current()>'
+    title: 'S<current()> - <realText(30)>'
     # categories: ['@categorie_*', '@categorie_*', '@categorie_*']
+    # language: ['@language_*', '@language_*', '@language_*']
 
 App\Entity\Season:
   season_1_{@media_serie*}:
@@ -40,6 +41,7 @@ App\Entity\Episode:
     duration: '<numberBetween(20, 60)>'
     release_date: "<dateTimeBetween('-1 week', '+1 week')>"
     season: '@season_*'
+    description: <realText(110)>
 
 # Génération d'historiques de visionnage.
 App\Entity\WatchHistory:

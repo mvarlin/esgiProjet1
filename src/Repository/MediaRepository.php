@@ -19,17 +19,17 @@ class MediaRepository extends ServiceEntityRepository
 //    /**
 //     * @return Media[] Returns an array of Media objects
 //     */
-public function findAllMedia(): array
-{
-    return $this->createQueryBuilder('m')
-        // ->andWhere('m.mediaType = :val')
-        // ->setParameter('val', $type)
-        ->orderBy('m.short_description', 'ASC')
-        ->setMaxResults(3)
-        ->getQuery()
-        ->getResult()
-    ;
-}
+// public function findAllMedia(): array
+// {
+//     return $this->createQueryBuilder('m')
+//         // ->andWhere('m.mediaType = :val')
+//         // ->setParameter('val', $type)
+//         ->orderBy('m.shortDescription', 'ASC')
+//         ->setMaxResults(3)
+//         ->getQuery()
+//         ->getResult()
+//     ;
+// }
 
 //    public function findOneBySomeField($value): ?Media
 //    {

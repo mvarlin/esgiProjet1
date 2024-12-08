@@ -27,6 +27,9 @@ class Episode
     #[ORM\JoinColumn(nullable: false)]
     private ?Season $season = null;
 
+    #[ORM\Column(length: 255)]
+    private ?string $description = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -76,6 +79,18 @@ class Episode
     public function setSeason(?Season $season): static
     {
         $this->season = $season;
+
+        return $this;
+    }
+
+    public function getDescription(): ?string
+    {
+        return $this->description;
+    }
+
+    public function setDescription(string $description): static
+    {
+        $this->description = $description;
 
         return $this;
     }
