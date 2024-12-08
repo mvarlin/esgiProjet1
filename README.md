@@ -48,6 +48,7 @@ composer install
 Exécutez les commandes suivantes pour créer la base de données et y charger les données initiales :  
 
 ```bash
+php bin/console doctrine:database:drop --force
 php bin/console doctrine:database:create
 php bin/console doctrine:migrations:migrate
 php bin/console hautelook:fixtures:load
