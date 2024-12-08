@@ -3,7 +3,9 @@
 namespace App\Controller;
 
 use App\Entity\Categorie;
+use App\Entity\Media;
 use App\Entity\Movie;
+use App\Entity\Serie;
 use App\Repository\CategorieRepository;
 use App\Repository\MediaRepository;
 use Doctrine\ORM\EntityManagerInterface;
@@ -22,21 +24,19 @@ class MovieController extends AbstractController
         ]);
     }
 
-    #[Route(path: '/detailserie', name: 'detail_serie')]
-    public function detailSerie(): Response {
-        return $this->render(view: 'movie/detail_serie.html.twig');
+    #[Route(path: '/detailserie/{id}', name: 'detail_serie')]
+    public function detailSerie(Serie $serie): Response {
+        dump($serie);
+        return $this->render(view: 'movie/detail_serie.html.twig', parameters: [
+            'serie' => $serie
+        ]);
     }
 
     #[Route(path: '/detail/{id}', name: 'detail')]
-    public function detail(string $id, Movie $movie): Response {
-        $staffs = $movie->getStaff();
-        $streams = $movie->getStream();
-        dump($staffs);
-        dump($movie);
+    public function detail(Media $media): Response {
+        dump($media);
         return $this->render(view: 'movie/detail.html.twig', parameters: [
-            'movie' => $movie,
-            'staffs' => $staffs,
-            'streams' => $streams
+            'media' => $media
         ]);
     }
 
