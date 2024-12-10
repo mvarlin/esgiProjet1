@@ -36,8 +36,8 @@ class AdminController extends AbstractController
     #[Route(path: '/adminfilms', name: 'admin_film')]
     public function listFilm(EntityManagerInterface $entityManager): Response {
         $repositoryMedia = $entityManager->getRepository(Media::class);
-        $medias = $repositoryMedia->findAllMedia();
-        // var_dump($medias);
+        $medias = $repositoryMedia->findAll();
+        dump($medias);
         return $this->render(view: 'admin/admin_films.html.twig',  parameters: [
             'medias' => $medias,
         ]);
