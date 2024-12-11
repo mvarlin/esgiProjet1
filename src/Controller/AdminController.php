@@ -37,7 +37,6 @@ class AdminController extends AbstractController
     public function listFilm(EntityManagerInterface $entityManager): Response {
         $repositoryMedia = $entityManager->getRepository(Media::class);
         $medias = $repositoryMedia->findAll();
-        dump($medias);
         return $this->render(view: 'admin/admin_films.html.twig',  parameters: [
             'medias' => $medias,
         ]);
@@ -47,8 +46,6 @@ class AdminController extends AbstractController
     public function user(EntityManagerInterface $entityManager): Response {
         $repositoryCategory = $entityManager->getRepository(User::class);
         $users = $repositoryCategory->findAll();
-
-        dump($users);
         return $this->render(view: 'admin/admin_users.html.twig',  parameters: [
             'users' => $users
         ]);

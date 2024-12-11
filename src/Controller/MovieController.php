@@ -17,7 +17,6 @@ class MovieController extends AbstractController
 {
     #[Route(path: '/category/{id}', name: 'movie_category')]
     public function category(Categorie $categories, string $id): Response {
-        dump($categories);
         return $this->render(view: 'movie/category.html.twig', parameters: [
             'categories' => $categories,
             // 'categoryLists' => $categoryList
@@ -26,7 +25,6 @@ class MovieController extends AbstractController
 
     #[Route(path: '/detailserie/{id}', name: 'detail_serie')]
     public function detailSerie(Serie $serie): Response {
-        dump($serie);
         return $this->render(view: 'movie/detail_serie.html.twig', parameters: [
             'serie' => $serie
         ]);
@@ -34,7 +32,6 @@ class MovieController extends AbstractController
 
     #[Route(path: '/detail/{id}', name: 'detail')]
     public function detail(Media $media): Response {
-        dump($media);
         return $this->render(view: 'movie/detail.html.twig', parameters: [
             'media' => $media
         ]);

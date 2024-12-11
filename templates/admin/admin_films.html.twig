@@ -92,8 +92,9 @@
                                             </div>
                                         </div>
                                     </td>
-                                    <td class="p-5 whitespace-nowrap text-sm leading-6 font-medium text-gray-900">{{ media.shortDescription }}</td>
+                                    <td class="p-5 whitespace-nowrap text-sm leading-6 font-medium text-gray-900">{{ media.releaseDate |date("j F Y ") }}</td> 
                                     <td class="p-5 whitespace-nowrap text-sm leading-6 font-medium text-gray-900">Date à ajouter{#{{ media.release_date }}#}</td>
+                                    {# <td class="p-5 whitespace-nowrap text-sm leading-6 font-medium text-gray-900">Date à ajouter{{ media.mediaType.value }}</td> #}
                                     {# {% if == "Film" %} #}
                                     <td class="p-5 whitespace-nowrap text-sm leading-6 font-medium text-gray-900">
                                         <div class="py-1.5 px-2.5 bg-blue-50 rounded-full flex justify-center w-20 items-center gap-1 text-blue-600">
