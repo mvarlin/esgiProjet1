@@ -126,7 +126,9 @@
         </section>
 
     </main>
+    {% if app.user %}
     {% include 'others/parts/right_sidebar.html.twig' %}
+    {% endif %}
 </div>
 
 </body>
