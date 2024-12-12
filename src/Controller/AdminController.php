@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\Categorie;
 use App\Entity\Language;
 use App\Entity\Media;
+use App\Entity\User;
 
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -35,16 +36,19 @@ class AdminController extends AbstractController
     #[Route(path: '/adminfilms', name: 'admin_film')]
     public function listFilm(EntityManagerInterface $entityManager): Response {
         $repositoryMedia = $entityManager->getRepository(Media::class);
-        $medias = $repositoryMedia->findAllMedia();
-        // var_dump($medias);
+        $medias = $repositoryMedia->findAll();
         return $this->render(view: 'admin/admin_films.html.twig',  parameters: [
             'medias' => $medias,
         ]);
     }
 
     #[Route(path: '/adminuser', name: 'admin_users')]
-    public function user(): Response {
-        return $this->render(view: 'admin/admin_users.html.twig');
+    public function user(EntityManagerInterface $entityManager): Response {
+        $repositoryCategory = $entityManager->getRepository(User::class);
+        $users = $repositoryCategory->findAll();
+        return $this->render(view: 'admin/admin_users.html.twig',  parameters: [
+            'users' => $users
+        ]);
     }
 
     #[Route(path: '/adminupload', name: 'admin_upload')]
