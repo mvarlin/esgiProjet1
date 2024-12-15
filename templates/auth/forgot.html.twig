@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <html lang="fr">
-
+<pre>
+    {{ dump() }}
+</pre>
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -11,6 +13,11 @@
 </head>
 
 <body class="font-montserrat text-sm bg-white">
+{% for message in app.flashes('success') %}
+            <div class="alert alert-success">
+                {{ message }}
+            </div>
+        {% endfor %}
 <div class="flex min-h-screen">
     
     {# {% include 'others/parts/left_sidebar.html.twig' %} #}
