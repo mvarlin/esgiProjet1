@@ -1,0 +1,9 @@
+<!DOCTYPE html>
+<html>
+    <body>
+        <h1>Modifier votre mot de passe</h1>
+        <p>Bonjour {{ userMail }},</p>
+        <p>Veuillez Modifier votre mot de passe en cliquant sur le lien ci-dessous :</p>
+        <a href="{{ path('auth_reset', {token: resetToken}) }}">Modifier mon mot de passe</a>
+    </body>
+</html>
