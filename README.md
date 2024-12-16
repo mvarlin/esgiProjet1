@@ -19,10 +19,16 @@ Le dossier `nginx` \ `default.conf` contient la configuration Nginx.
 ---
 
 ## **Variables d’environnement**  
-Ajoutez la variable suivante dans un fichier .env à la racine du projet pour configurer les services :  
+Ajoutez les variables suivante dans un fichier .env à la racine du projet pour configurer les services :  
 
 ```env
+###> doctrine/mysql ###
 MYSQL_ROOT_PASSWORD=votremotdepasse
+###> doctrine/mysql ###
+
+###> symfony/mailer ###
+MAILER_DSN=null://null
+###< symfony/mailer ###
 ```
 
 ---
